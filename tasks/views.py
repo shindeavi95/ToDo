@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from .models import *
 
 def index(request):
-    return render(request,'tasks/list.html')
+    tasks = Task.objects.all()
+    data= {'tasks':tasks}
+    return render(request,'tasks/list.html',data)
