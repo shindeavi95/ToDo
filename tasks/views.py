@@ -24,5 +24,15 @@ def updateTask(request, pk):
                  form = TaskForm(request.POST, instance=task)
                  if form.is_valid():
                      form.save()
-                    return redirect('/')
+                     return redirect('/')
              data = {'form':form}
+
+             return render(request,'tasks/update_task.html',data)
+
+def deleteTask(request,pk):
+    item = Task.objects.get(id=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('/')
+    data = {'item':item}
+    return render(request, 'tasks/delete_task.html', data)
